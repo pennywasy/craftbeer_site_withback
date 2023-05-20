@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Бар крафтового пива</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+	<div class="login__wrapper" id="login__wrapper">
+	  <div class="login__title__wrapper">
+	  	<h1 class="login__title">Вход</h1>
+	  	<div class="nav__wrapper">
+	  		<ul class="nav">
+	  			<div class="picked">
+		  			<li>
+		  				<p>Войти</p>
+		  			</li>
+	  			</div>
+	  			<li>
+	  				<a href="../registry">Регистрация</a>
+	  			</li>
+	  			<li>
+	  				<a href="..">На главную</a>
+	  			</li>
+	  		</ul>
+	  	</div>
+      </div>
+
+	  <div class="login__content__wrapper">
+	    <form class="form__login" action="" method="POST">
+	      <div class="registry__radio">
+	          <ul class="tabs">
+	              <li>
+	                  <div class="tabs1">
+	                      <input type="radio" id="tabs1" name="tab" checked>
+	                      <label for="tabs1">Логин</label>
+	                  </div>
+	              </li>
+	              <li>
+	                  <div class="tabs2">
+	                      <input type="radio" id="tabs2" name="tab">
+	                      <label for="tabs2">Email</label>
+	                  </div>
+	              </li>
+	              <li>
+	                  <div class="tabs3">
+	                      <input type="radio" id="tabs3" name="tab">
+	                      <label for="tabs3">Номер телефона</label>
+	                  </div>
+	                  
+	              </li>
+	          </ul>
+	      </div>
+
+	      <input id='login' type="text" name="login" placeholder="Логин" required>
+	      <input type="password" name="password" placeholder="Пароль" required>
+	      <button>Войти</button>
+	    </form>
+	  </div>
+	</div>
+	<script src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

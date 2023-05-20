@@ -40,12 +40,22 @@
               <li class="third-card">
                 <a href="#" class="nav-button">кнопка 2</a>
               </li>
+
+              {% if not session['isAuth'] %}
               <li class="fourth-card">
-                <a href="#" class="nav-button">кнопка 3</a>
+                <a href="login" class="nav-button">Войти</a>
               </li>
               <li class="fifth-card">
-                <a href="#" class="nav-button">кнопка 4</a>
+                <a href="registry" class="nav-button" id="button__registry">Регистрация</a>
               </li>
+              {% else %}
+              <li class="fourth-card">
+                <a href="#" class="nav-button">Личный кабинет</a>
+              </li>
+              <li class="fifth-card">
+                <a href="logout" class="nav-button">Выйти</a>
+              </li>
+              {% endif %}
             </ul>
           </div>
         </div>
@@ -69,6 +79,11 @@
         </div>
         {%endfor%}
       </div>
+
+      
+
+      
+
       
     </div>
 
@@ -157,5 +172,6 @@
     <script src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.modal.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
   </body>
 </html>
