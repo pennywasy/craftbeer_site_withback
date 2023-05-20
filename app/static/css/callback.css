@@ -1,0 +1,69 @@
+.callback {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  height: 300px;
+  margin-bottom: 200px;
+}
+
+.callback-wrapper {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+}
+
+.callback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+}
+
+.callback-name-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.callback-name-wrapper input {
+  width: 320px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  border: 0.5px solid #f3f4f3;
+  text-align: flex-start;
+  padding-left: 20px;
+}
+
+.callback-name-wrapper input:focus {
+  border: 0.5px solid #f3f4f3;
+  border-color: #f7f7f7;
+}
+
+.callback-description {
+  height: 100px;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  border: 0.5px solid #f3f4f3;
+  padding-top: 0;
+  padding-left: 20px;
+}
+
+.callback-button {
+  width: 250px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #1c1c1c;
+  color: white;
+}
+
+.callback-button:hover {
+  background-color: #2e2e2e;
+}
+
+.callback-button:active {
+  background-color: black;
+}

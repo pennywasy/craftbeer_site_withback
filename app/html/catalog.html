@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Каталог</title>
+	<link rel="stylesheet" type="text/css" href="css/navigation.css">
+  <link rel="stylesheet" href="css/catalog.css" />
+	<link rel="stylesheet" type="text/css" href="css/footer.css">
+	<link rel="stylesheet" type="text/css" href="css/adress.css">
+  <link rel="stylesheet" type="text/css" href="css/products.css">
+  <link rel="stylesheet" href="css/jquery.modal.min.css" />
+</head>
+<body>
+	<header>
+      <div class="container navigation">
+        <h1 class="title">Бар крафтового пива</h1>
+        <div class="nav-input-wrapper">
+          <input
+            type="text"
+            name="navigation"
+            class="nav-input"
+            placeholder="Поиск..." />
+        </div>
+
+        
+      </div>
+    </header>
+
+    <div class="nav-bar">
+          <div class="nav-wrapper">
+            <ul class="nav">
+              <div class="first-card-wrapper">
+                <li class="first-card">
+                  <a href="#" class="nav-button" id="button1">каталог</a>
+                </li>
+              </div>
+              <li class="second-card">
+                <a href="#" class="nav-button">кнопка 1</a>
+              </li>
+              <li class="third-card">
+                <a href="#" class="nav-button">кнопка 2</a>
+              </li>
+              <li class="fourth-card">
+                <a href="#" class="nav-button">кнопка 3</a>
+              </li>
+              <li class="fifth-card">
+                <a href="#" class="nav-button">кнопка 4</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+    <div class="catalog" id="catalog" style="display: none">
+      <div class="catalog-title-wrapper">
+        <h1 class="catalog-title">Каталог</h1>
+      </div>
+      <div class="modal-wrapper" id="catalog-wrapper"></div>
+    </div>
+
+
+    <section class="products">
+    	<div class="products-cards-wrapper" id="products">
+        
+      </div>
+
+      <div class="products-nav-ul">
+        <ul class="products-nav">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container contacts">
+        <ul class="contact">
+          <li class="mail"><span>E-mail@gmail.com</span></li>
+          <li class="number"><span>8-800-666-35-35</span></li>
+        </ul>
+      </div>
+    </footer>
+
+
+    <script src="js/jquery-min.js"></script>
+    <script src="js/jquery.modal.min.js"></script>
+    <script type="text/javascript" src="js/cards.js"></script>
+    <script type="text/javascript" src="js/modal.js"></script>
+    <script type="text/javascript" src="js/products.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+.catalog-card {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.image-wrapper img {
+  width: 250px;
+  height: 250px;
+}
+
+.catalog {
+  max-width: 55% !important;
+  justify-content: center;
+}
+
+.catalog-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.catalog-title {
+  text-decoration: none;
+  color: black;
+}
+
+.catalog-title:hover {
+  color: goldenrod;
+}

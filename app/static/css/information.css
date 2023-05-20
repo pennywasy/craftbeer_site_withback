@@ -1,0 +1,25 @@
+.information {
+  margin-top: 75px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.information-cards-wrapper {
+  width: 60%;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.information-cards {
+  margin-bottom: 75px;
+  width: 20%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: flex-start;
+}
