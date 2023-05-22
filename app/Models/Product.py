@@ -11,10 +11,11 @@ class Product(db.Model):
 
 	category_id = db.Column(db.Integer, db.ForeignKey('category.id'), unique=False)
 
-	def __init__(self, name, description, photo):
+	def __init__(self, name, description, photo, category_id):
 		self.name = name
 		self.description = description
 		self.photo = photo
+		self.category_id = category_id
 
 	def __repr__(self):
 		return f"{self.photo}"[2:-1]

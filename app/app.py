@@ -10,16 +10,34 @@ def index():
 	return render_template('index.html', Category=Category, Information=Information)
 
 
-# @app.route('/admin', methods=['GET', 'POST'])
-# def admin():
-# 	if request.method == 'POST':
-# 		name = request.form.get('name')
-# 		photo = request.files['photo']
-# 		addCategory(name, photo)
-# 	return render_template('admin.html')
+@app.route('/admin/category/', methods=['GET', 'POST'])
+def admin_category():
+	if getAdmin(session['id']):
+		if request.method == 'POST':
+			name = request.form.get('name')
+			photo = request.files['photo']
+			addCategory(name, photo)
+		return render_template('admin_category.html')
+
+	return redirect(url_for('index'))
+
+@app.route('/admin/product/', methods=['GET', 'POST'])
+def admin_product():
+	if getAdmin(session['id']):
+		Category = getCategory()
+		if request.method == 'POST':
+			name = request.form.get('name')
+			description = request.form.get('description')
+			photo = request.files['photo']
+			category_id = request.form.get('category_id')
+			addProduct(name, description, photo, category_id)
+		return render_template('admin_product.html', Category=Category) 
 
 
-@app.route('/login', methods=['POST', 'GET'])
+	return redirect(url_for('index'))
+
+
+@app.route('/login/', methods=['POST', 'GET'])
 def login():
 	if request.method == 'POST':
 		login = request.form.get('login')
@@ -29,13 +47,15 @@ def login():
 			session['login'] = login
 			session['id'] = user.id
 			session['email'] = user.email
+
+
 			return redirect(url_for('index'))
 		
 
 	return render_template('login.html')
 
 
-@app.route('/registry', methods=['POST', 'GET'])
+@app.route('/registry/', methods=['POST', 'GET'])
 def registry():
 	if request.method == 'POST':
 		login = request.form.get('login')
@@ -60,20 +80,24 @@ def registry():
 	return render_template('registry.html')
 
 
-@app.route('/personal')
+@app.route('/personal/')
 def personal():
 	Category = getCategory()
 	return render_template('personal.html', Category=Category)
 
 
-@app.route('/catalog/<category>', methods=['GET'])
+@app.route('/catalog/<category>/', methods=['GET'])
 def catalog(category):
-	pass
+	Category = getCategory()
+	product = getProduct(category)
+	for item in product:
+		print(product)	
+	return render_template('catalog.html', Category=Category, product=product)
 
 
-@app.route('/logout')
+@app.route('/logout/')
 def logout():
 	session['isAuth'] = False
 	session['login'] = None
 	session['id'] = None
-	return redirect(url_for('index'))
+	return 
