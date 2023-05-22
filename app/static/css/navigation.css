@@ -7,12 +7,25 @@
 header {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.navigation {
+.title{
+  text-align: justify-all;
+}
+
+.logo__wrapper{
+  width: 125px;
+}
+
+.logo__wrapper img{
   width: 100%;
+}
+
+.navigation {
+  width: 75%;
   display: flex;
   flex-direction: column;
   align-items: center;

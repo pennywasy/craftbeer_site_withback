@@ -8,6 +8,8 @@ class Category(db.Model):
 	name = db.Column(db.String(100), nullable=False)
 	photo = db.Column(db.BLOB)
 
+	product_id = db.relationship('Product', backref='product')
+
 	def __init__(self, name, photo):
 		self.name = name
 		self.photo = photo

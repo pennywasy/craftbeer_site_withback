@@ -3,7 +3,6 @@ from app.config import app
 from app.Models.DataBase import *
 
 
-
 @app.route('/')
 def index():
 	Category = getCategory()
@@ -29,6 +28,7 @@ def login():
 			session['isAuth'] = True
 			session['login'] = login
 			session['id'] = user.id
+			session['email'] = user.email
 			return redirect(url_for('index'))
 		
 
@@ -48,6 +48,7 @@ def registry():
 			session['isAuth'] = True
 			session['login'] = login
 			session['id'] = user.id
+			session['email'] = user.email
 			return redirect(url_for('index'))
 			print('pass')
 		except Exception as e:
@@ -57,6 +58,17 @@ def registry():
 			
 
 	return render_template('registry.html')
+
+
+@app.route('/personal')
+def personal():
+	Category = getCategory()
+	return render_template('personal.html', Category=Category)
+
+
+@app.route('/catalog/<category>', methods=['GET'])
+def catalog(category):
+	pass
 
 
 @app.route('/logout')

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/catalog.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/adress.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/information.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/callback.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.modal.min.css') }}" />
+	<title>Бар крафтового пива</title>
+</head>
+<body>
+	<header>
+		<div class="logo__wrapper">
+		  <a href="../"><img src="{{ url_for('static', filename='img/lenin.png') }}"></a>
+		</div>
+	  <div class="container navigation">
+	    <h1 class="title">Бар крафтового пива <br> им. Владимира Ульянова</h1>
+	    <div class="nav-input-wrapper">
+	      <input
+	        type="text"
+	        name="navigation"
+	        class="nav-input"
+	        placeholder="Поиск..." />
+	    </div>
+	           
+	  </div>
+	</header>
+	<div class="nav-bar">
+	      <div class="nav-wrapper">
+	        <ul class="nav">
+	          <div class="first-card-wrapper">
+	            <li class="first-card">
+	              <a href="#" class="nav-button" id="button1">каталог</a>
+	            </li>
+	          </div>
+	          <li class="second-card">
+	            <a href="#" class="nav-button">Кнопка 1</a>
+	          </li>
+	          <li class="third-card">
+	            <a href="#" class="nav-button">кнопка 2</a>
+	          </li>
+
+	          {% if not session['isAuth'] %}
+	          <li class="fourth-card">
+	            <a href="login" class="nav-button">Войти</a>
+	          </li>
+	          <li class="fifth-card">
+	            <a href="registry" class="nav-button" id="button__registry">Регистрация</a>
+	          </li>
+	          {% else %}
+	          <li class="fourth-card">
+	            <a href="#" class="nav-button">Личный кабинет</a>
+	          </li>
+	          <li class="fifth-card">
+	            <a href="logout" class="nav-button">Выйти</a>
+	          </li>
+	          {% endif %}
+	        </ul>
+	      </div>
+	    </div>
+
+	<div class="catalog" id="catalog" style="display: none">
+	  
+	  <div class="catalog-title-wrapper">
+	    <h1 class="catalog-title">Каталог</h1>
+	  </div>
+	  <div class="modal-wrapper" id="catalog-wrapper">
+	    {% for item in Category%}
+	    <div class="catalog-card">
+	      <div class="image-wrapper">
+	        <img src="data:jpeg;base64,{{ item }}" alt="" />
+	      </div>
+	      <div class="text-wrapper">
+	        <a href="catalog.html" class="catalog-title">
+	            {{ item.name }}
+	        </a>
+	      </div>
+	    </div>
+	    {%endfor%}
+	  </div>
+
+	  
+
+	  
+
+	  
+	</div>
+	<script src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.modal.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
+</body>
+</html>

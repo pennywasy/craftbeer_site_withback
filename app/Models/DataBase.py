@@ -19,7 +19,7 @@ def getInfromation():
 	return Information.query.all()
 
 def getUser(login, password):
-	return db.session.query(User.id, User.login).filter((User.login == login) | (User.email == login) | (User.phone == login)).filter(User.password == password).first()
+	return db.session.query(User.id, User.login, User.email).filter((User.login == login) | (User.email == login) | (User.phone == login)).filter(User.password == password).first()
 
 
 
