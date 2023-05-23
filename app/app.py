@@ -112,6 +112,7 @@ def product(product):
 @app.route('/logout/')
 def logout():
 	session['isAuth'] = False
-	session['login'] = None
-	session['id'] = None
+	session['login'] = ''
+	session['id'] = ''
+	session['email'] = ''
 	return redirect(session['side'])
