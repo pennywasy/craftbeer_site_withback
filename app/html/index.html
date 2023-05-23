@@ -15,7 +15,7 @@
   <body>
     <header>
       <div class="logo__wrapper">
-        <a href="../"><img src="{{ url_for('static', filename='img/lenin.png') }}"></a>
+        <a href="{{url_for('index')}}"><img src="{{ url_for('static', filename='img/lenin.png') }}"></a>
       </div>
       <div class="container navigation">
         <h1 class="title">Бар крафтового пива <br> им. Владимира Ульянова</h1>
@@ -38,25 +38,25 @@
                 </li>
               </div>
               <li class="second-card">
-                <a href="#" class="nav-button">Кнопка 1</a>
+                <a href="#" class="nav-button">Аренда бара</a>
               </li>
               <li class="third-card">
-                <a href="#" class="nav-button">кнопка 2</a>
+                <a href="#" class="nav-button">Выездные дегустации</a>
               </li>
 
               {% if not session['isAuth'] %}
               <li class="fourth-card">
-                <a href="login" class="nav-button">Войти</a>
+                <a href="{{url_for('login')}}" class="nav-button">Войти</a>
               </li>
               <li class="fifth-card">
-                <a href="registry" class="nav-button" id="button__registry">Регистрация</a>
+                <a href="{{url_for('registry')}}" class="nav-button" id="button__registry">Регистрация</a>
               </li>
               {% else %}
               <li class="fourth-card">
-                <a href="personal" class="nav-button">Личный кабинет</a>
+                <a href="{{url_for('personal')}}" class="nav-button">Личный кабинет</a>
               </li>
               <li class="fifth-card">
-                <a href="logout" class="nav-button">Выйти</a>
+                <a href="{{url_for('logout')}}" class="nav-button">Выйти</a>
               </li>
               {% endif %}
             </ul>
@@ -75,7 +75,7 @@
             <img src="data:jpeg;base64,{{ item }}" alt="" />
           </div>
           <div class="text-wrapper">
-            <a href="/catalog/{{ item.id }}" class="catalog-title">
+            <a href="{{url_for('catalog', category=item.id)}}" class="catalog-title">
                 {{ item.name }}
             </a>
           </div>

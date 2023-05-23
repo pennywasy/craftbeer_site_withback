@@ -5,6 +5,7 @@ from app.Models.DataBase import *
 
 @app.route('/')
 def index():
+	session['side'] = '/'
 	Category = getCategory()
 	Information = getInfromation()
 	return render_template('index.html', Category=Category, Information=Information)
@@ -49,8 +50,10 @@ def login():
 			session['email'] = user.email
 
 
-			return redirect(url_for('index'))
-		
+			return redirect(session['side'])
+
+		return render_template('login.html', message='Не верный логин или пароль')	
+				
 
 	return render_template('login.html')
 
@@ -82,16 +85,19 @@ def registry():
 
 @app.route('/personal/')
 def personal():
-	Category = getCategory()
-	return render_template('personal.html', Category=Category)
+	session['side'] = '/personal/'
+	if session['isAuth']:
+		Category = getCategory()
+		return render_template('personal.html', Category=Category)
+
+	return redirect(url_for('index'))
 
 
 @app.route('/catalog/<category>/', methods=['GET'])
 def catalog(category):
+	session['side'] = f'/catalog/{category}/'
 	Category = getCategory()
-	product = getProduct(category)
-	for item in product:
-		print(product)	
+	product = getProduct(category)	
 	return render_template('catalog.html', Category=Category, product=product)
 
 
@@ -100,4 +106,4 @@ def logout():
 	session['isAuth'] = False
 	session['login'] = None
 	session['id'] = None
-	return 
+	return redirect(session['side'])
