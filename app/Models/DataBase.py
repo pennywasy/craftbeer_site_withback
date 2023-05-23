@@ -31,15 +31,17 @@ def registryUser(login, password, email, phone):
 	db.session.commit()
 	return user
 	
-def addProduct(name, description, photo, category_id):
+def addProduct(name, price, description, photo, category_id):
 	photo = base64.b64encode(photo.read())
-	db.session.add(Product(name, description, photo, category_id))
+	db.session.add(Product(name, price, description, photo, category_id))
 	return db.session.commit()
 
 
-def getProduct(category):
+def getProducts_byCategory(category):
 	return Product.query.filter_by(category_id=category).all() 
 
+def getProducts_byName(name):
+	return Product.query.filter_by(name=name).first() 
 
 
 def getAdmin(user_id):

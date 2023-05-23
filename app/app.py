@@ -28,10 +28,11 @@ def admin_product():
 		Category = getCategory()
 		if request.method == 'POST':
 			name = request.form.get('name')
+			price = request.form.get('price')
 			description = request.form.get('description')
 			photo = request.files['photo']
 			category_id = request.form.get('category_id')
-			addProduct(name, description, photo, category_id)
+			addProduct(name, price, description, photo, category_id)
 		return render_template('admin_product.html', Category=Category) 
 
 
@@ -97,8 +98,15 @@ def personal():
 def catalog(category):
 	session['side'] = f'/catalog/{category}/'
 	Category = getCategory()
-	product = getProduct(category)	
+	product = getProducts_byCategory(category)	
 	return render_template('catalog.html', Category=Category, product=product)
+
+
+@app.route('/catalog/product/<product>', methods=['GET'])
+def product(product):
+	Category = getCategory()
+	product = getProducts_byName(product)
+	return render_template('product.html', Category=Category, product=product)
 
 
 @app.route('/logout/')

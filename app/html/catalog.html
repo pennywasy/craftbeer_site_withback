@@ -6,8 +6,7 @@
 	<title>Каталог</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/catalog.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/adress.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}" /><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/products.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.modal.min.css') }}" />
 </head>
 <body>
@@ -90,16 +89,14 @@
 
 
     <section class="products">
-      <h1>{% print(category) %}</h1>
     	<div class="products-cards-wrapper" id="products">
            {% for item in product %}
-           <h1>{% print(category) %}</h1>
            <div class="product-card">
             <img class="products-img" src="data:jpeg;base64,{{ item }}">
-            <h1>{{ item.name }}</h1>
-            <p class="products-p">
+            <a class="product__title" href="{{url_for('product', product=item.name)}}">{{ item.name }}</a>
+            <!-- <p class="products-p">
               {{ item.description }}
-            </p>
+            </p> -->
           </div>
           {% endfor %}
       </div>
