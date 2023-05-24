@@ -25,8 +25,9 @@ def getUser(login, password):
 
 
 
-def registryUser(login, password, email, phone):
-	user = User(login, password, email, phone)
+def registryUser(login, password, email, phone, photo):
+	photo = base64.b64encode(photo.read())
+	user = User(login, password, email, phone, photo)
 	db.session.add(user)
 	db.session.commit()
 	return user

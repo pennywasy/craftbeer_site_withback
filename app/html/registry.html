@@ -29,11 +29,12 @@
 	    </div>
 	    <h1 class="registry__title">{% print(error) %}</h1>
 	  <div class="registry__content__wrapper">
-	    <form class="form__registry" action="registry" method="POST">
+	    <form class="form__registry" action="registry" method="POST" enctype="multipart/form-data">
 	      <input type="text" name="login" placeholder="Логин" required>
 	      <input type="password" name="password" placeholder="Пароль" required>
 	      <input type="email" name="email" placeholder="E-mail" required>
 	      <input type="tel" name="phone" placeholder="Телефон" required>
+	      <input type="file" name="avatar">
 	      <button>Зарегистрироваться</button>
 	    </form>
 	  </div>

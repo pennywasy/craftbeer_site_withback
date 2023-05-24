@@ -66,6 +66,7 @@ def registry():
 		password = request.form.get('password')
 		email = request.form.get('email')
 		phone = request.form.get('phone')
+		photo = request.files['avatar']
 		try:
 			error = ''
 			user = registryUser(login, password, email, phone)
