@@ -44,7 +44,7 @@ def login():
 	if request.method == 'POST':
 		login = request.form.get('login')
 		password = request.form.get('password')
-		if user := getUser(login, password):
+		if user := getUser_byPassword(login, password):
 			session['isAuth'] = True
 			session['login'] = login
 			session['id'] = user.id
@@ -69,7 +69,7 @@ def registry():
 		photo = request.files['avatar']
 		try:
 			error = ''
-			user = registryUser(login, password, email, phone)
+			user = registryUser(login, password, email, phone, photo)
 			session['isAuth'] = True
 			session['login'] = login
 			session['id'] = user.id
@@ -89,8 +89,9 @@ def registry():
 def personal():
 	session['side'] = '/personal/'
 	if session['isAuth']:
+		user = getUser_byId(session['id'])
 		Category = getCategory()
-		return render_template('personal.html', Category=Category)
+		return render_template('personal.html', Category=Category, user=user)
 
 	return redirect(url_for('index'))
 

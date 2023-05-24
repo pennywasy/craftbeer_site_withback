@@ -18,4 +18,4 @@ class User(db.Model):
 		self.avatar = avatar
 
 	def __repr__(self):
-		return f"{self.avatar}"
+		return f"{self.avatar}"[2:-1]

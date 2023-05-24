@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/information.css') }}" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/callback.css') }}" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.modal.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/personal.css')}}">
 	<title>Бар крафтового пива</title>
 </head>
 <body>
@@ -85,6 +86,20 @@
 	</div>
 
 
+	<seciton class="personal">
+		<div class="personal__wrapper">
+			<div class="personal__avatar__wrapper">
+				<img class="personal__avatar" src="data:jpeg;base64,{{user}}" alt="Изображение не доступно">
+				<form class="personal__avatar__update" action="avatar-update" method="POST" enctype="multipart/form-data">
+					<label class="input__file">
+						<span class="input__file__text" type='text'></span>
+						<input type="file" name="avatar">
+						<span class="input__file__button">Выберете файл</span>
+					</label>
+				</form>
+			</div>
+		</div>
+	</seciton>
 	<footer>
 	  <div class="container contacts">
 	    <ul class="contact">

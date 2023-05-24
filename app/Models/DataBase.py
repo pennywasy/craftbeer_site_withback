@@ -20,9 +20,12 @@ def getCategory():
 def getInfromation():
 	return Information.query.all()
 
-def getUser(login, password):
+def getUser_byPassword(login, password):
 	return db.session.query(User.id, User.login, User.email).filter((User.login == login) | (User.email == login) | (User.phone == login)).filter(User.password == password).first()
 
+
+def getUser_byId(id):
+	return User.query.filter_by(id=id).first()
 
 
 def registryUser(login, password, email, phone, photo):
