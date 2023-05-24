@@ -1,3 +1,34 @@
+.personal__wrapper{
+  display: flex;
+  align-items: flex-start;
+  padding: 100px 0 100px 0;
+  gap: 50px;
+}
+
+
+.personal__avatar__wrapper{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 50px;
+
+}
+
+
+.personal__avatar{
+  width: 60%;
+}
+
+.personal__avatar__update{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+
 .input__file__text{
   padding: 0 10px;
   line-height: 40px;
@@ -49,4 +80,53 @@
 
 .input__file__button:active{
   background-color: black;
+}
+
+
+.personal__data__wrapper{
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.personal__data__update{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+
+.personal__password__update{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+
+.personal__data__update input, .personal__password__update input{
+  padding-left: 15px;
+  outline: none;
+  height: 45px;
+  width: 97%;
+  border: 0.5px solid black;
+  border-radius: 10px;
+  background-color: #f3f4f3;
+}
+
+button {
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #1c1c1c;
+  color: white;
+}
+
+
+button:hover{
+  background-color: #2e2e2e;
 }

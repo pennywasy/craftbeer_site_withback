@@ -96,6 +96,22 @@
 						<input type="file" name="avatar">
 						<span class="input__file__button">Выберете файл</span>
 					</label>
+					<button>Обновить</button>
+				</form>
+			</div>
+			<div class="personal__data__wrapper">
+				<form class="personal__data__update">
+					<h1>Персональные данные</h1>
+					<input type="text" name="login" placeholder="Логин" value="{{user.login}}">
+					<input type="email" name="email" placeholder="E-mail" value="{{user.email}}">
+					<input type="tel" name="phone" placeholder="Телефон" value="{{user.phone}}">
+					<button>Обновить</button>
+				</form>
+				<form class="personal__password__update">
+					<h1>Пароль</h1>
+					<input type="password" name="password" placeholder="Пароль">
+					<input type="password" name="re-password" placeholder="Повторите пароль">
+					<button>Обновить</button>
 				</form>
 			</div>
 		</div>
@@ -112,5 +128,6 @@
 	<script src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/jquery.modal.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/personal.js') }}"></script>
 </body>
 </html>
