@@ -97,7 +97,7 @@
             <input type="text" name="product_id" value="{{item.id}}" style="opacity: 0;">
              <div class="product-card">
               <img class="products-img" src="data:jpeg;base64,{{ item }}">
-              <a class="product__title" href="{{url_for('product', product=item.name)}}">{{ item.name }}<br>{{item.price}}</a>
+              <a class="product__title" href="{{url_for('product', product=item.name)}}">{{ item.name }}<br>{{item.price}} ₽</a>
               <div class="products__cart__wrapper">
                 <button form="{{item.id}}">В корзину</button>
                 <span id="span{{item.id}}"></span>

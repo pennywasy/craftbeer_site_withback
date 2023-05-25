@@ -38,6 +38,7 @@
 }
 
 .products {
+  height: 1800px;
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -50,10 +51,11 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  max-width: 700px;
+  max-width: 1400px;
+
   /* width: 70%; */
-  height: 100%;
-  gap: 50px;
+
+  gap: 25px;
 }
 
 .product-card {
