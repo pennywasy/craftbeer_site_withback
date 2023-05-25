@@ -4,6 +4,7 @@ from app.Models.Information import Information
 from app.Models.User import User
 from app.Models.Product import Product
 from app.Models.Admin import Admin
+from app.Models.Cart import Cart
 import base64
 
 def addCategory(name, photo):
@@ -28,6 +29,22 @@ def getUser_byId(id):
 	return User.query.filter_by(id=id).first()
 
 
+def updateUserPassword(id, password):
+	User.query.filter_by(id=id).update(dict(password=password))
+	db.session.commit()
+	return
+
+def updateUserData(id, login, email, phone):
+	User.query.filter_by(id=id).update(dict(login=login, email=email, phone=phone))
+	db.session.commit()
+	return
+
+def updateUserAvatar(id, photo):
+	photo = base64.b64encode(photo.read())
+	User.query.filter_by(id=id).update(dict(avatar=photo))
+	db.session.commit()
+	return
+
 def registryUser(login, password, email, phone, photo):
 	photo = base64.b64encode(photo.read())
 	user = User(login, password, email, phone, photo)
@@ -50,3 +67,36 @@ def getProducts_byName(name):
 
 def getAdmin(user_id):
 	return Admin.query.filter_by(id=user_id).first()
+
+
+def addCartItem(user_id, product_id):
+	db.session.add(Cart(user_id, product_id))
+	db.session.commit()
+	return
+
+
+def addCountCartItem(user_id, product_id):
+	cart = Cart.query.filter_by(user_id=user_id, product_id=product_id).first()
+	count = cart.count + 1
+	cart.addCount()
+	db.session.commit()
+	return count
+
+def subCountCartItem(user_id, product_id):
+	cart = Cart.query.filter_by(user_id=user_id, product_id=product_id).first()
+	count = cart.count + 1
+	cart.subCount()
+	db.session.commit()
+	return count
+
+def deleteItemCart_byId(user_id, product_id):
+	Cart.query.filter_by(user_id=user_id, product_id=product_id).delete()
+	db.session.commit()
+	return
+
+
+def getCartItem(user_id):
+	cartItem = db.session.query(Product, Cart).join(Cart, Cart.product_id == Product.id).join(User, User.id == Cart.user_id)
+	# cartItem = Product.query.join(Cart, Cart.product_id == Product.id).join(User, User.id == Cart.user_id)
+	cartItem = cartItem.filter(User.id == user_id)
+	return cartItem

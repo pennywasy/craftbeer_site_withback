@@ -29,9 +29,10 @@
 	    </div>
 	    <h1 class="registry__title">{% print(error) %}</h1>
 	  <div class="registry__content__wrapper">
-	    <form class="form__registry" action="" method="POST" enctype="multipart/form-data">
+	    <form id="form__registry" class="form__registry" action="" method="POST" enctype="multipart/form-data">
 	      <input type="text" name="login" placeholder="Логин" required>
-	      <input type="password" name="password" placeholder="Пароль" required>
+	      <input id="password" type="password" name="password" placeholder="Пароль" required>
+	      <input id="re-password" type="password" name="re-password" placeholder="Повторите пароль" required>
 	      <input type="email" name="email" placeholder="E-mail" required>
 	      <input type="tel" name="phone" placeholder="Телефон" required>
 	      <label class="input__file">

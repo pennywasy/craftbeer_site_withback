@@ -1,7 +1,27 @@
+@font-face{
+  font-family: 'PT-Root-UI Bold';
+  src: url('fonts/PT-Root-UI_Bold.ttf');
+}
+
+@font-face{
+  font-family: 'PT-Root-UI Light';
+  src: url('fonts/PT-Root-UI_Light.ttf');
+}
+
+@font-face{
+  font-family: 'PT-Root-UI Medium';
+  src: url('fonts/PT-Root-UI_Medium.ttf');
+}
+
+@font-face{
+  font-family: 'PT-Root-UI';
+  src: url('fonts/PT-Root-UI_Regular.ttf');
+}
+
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: PT-Root-UI;
 }
 
 header {

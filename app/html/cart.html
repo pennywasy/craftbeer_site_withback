@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/catalog.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.modal.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/cart.css')}}">
+	<title>Бар крафтового пива</title>
+</head>
+<body>
+	<script src="{{ url_for
+	('static', filename='js/jquery-min.js') }}"></script> 
+	<header>
+	  <div class="logo__wrapper">
+	    <a href="{{url_for('index')}}"><img src="{{ url_for('static', filename='img/lenin.png') }}"></a>
+	  </div>
+	  <div class="container navigation">
+	    <h1 class="title">Бар крафтового пива <br> им. Владимира Ульянова</h1>
+	    <div class="nav-input-wrapper">
+	      <input
+	        type="text"
+	        name="navigation"
+	        class="nav-input"
+	        placeholder="Поиск..." />
+	    </div>
+	           
+	  </div>
+	</header>
+	<div class="nav-bar">
+	      <div class="nav-wrapper">
+	        <ul class="nav">
+            <li class="first-card">
+              <a href="#" class="nav-button" id="button1">каталог</a>
+            </li>
+	          <li class="second-card">
+	            <a href="#" class="nav-button">Аренда бара</a>
+	          </li>
+	          <li class="third-card">
+	            <a href="#" class="nav-button">Выездные дегустации</a>
+	          </li>
+
+	          {% if not session['isAuth'] %}
+	          <li class="fourth-card">
+	            <a href="{{url_for('login')}}" class="nav-button">Войти</a>
+	          </li>
+	          <li class="fifth-card">
+	            <a href="{{url_for('registry')}}" class="nav-button" id="button__registry">Регистрация</a>
+	          </li>
+	          {% else %}
+	          <li class="fourth-card">
+	            <a href="{{url_for('personal')}}" class="nav-button">Личный кабинет</a>
+	          </li>
+	          {% endif %}
+	          <div class="first-card-wrapper">
+		          <li>
+		            <a href="{{url_for('cart')}}" class="nav-button">Корзина</a>
+		          </li>
+	          </div>
+	        </ul>
+	      </div>
+	    </div>
+
+	<div class="catalog" id="catalog" style="display: none">
+	  
+	  <div class="catalog-title-wrapper">
+	    <h1 class="catalog-title">Каталог</h1>
+	  </div>
+	  <div class="modal-wrapper" id="catalog-wrapper">
+	    {% for item in Category%}
+	    <div class="catalog-card">
+	      <div class="image-wrapper">
+	        <img src="data:jpeg;base64,{{ item }}" alt="" />
+	      </div>
+	      <div class="text-wrapper">
+	        <a href="{{url_for('catalog', category=item.id)}}" class="catalog-title">
+	            {{ item.name }}
+	        </a>
+	      </div>
+	    </div>
+	    {%endfor%}
+	  </div>
+
+	  
+
+	  
+
+	  
+	</div>
+
+
+	<section class="cart">
+		<div class="cart__wrapper">
+			<div class="cart__table__wrapper">
+				{% for item in cart %}
+				<div id="td{{item.Product.id}}" class="cart__table">
+					<div class="cart__img__wrapper">
+						<img src="data:jpeg;base64,{{ item.Product }}">
+					</div>
+					<div class="cart__name__wrapper">
+						<a href="">{{ item.Product.name }}</a>
+						<div class="cart__price__wrapper">
+							<span>{{ item.Product.price }}₽</span>
+						</div>
+						<div class="cart__counter">
+							<button id="minus{{item.Product.id}}" class="minus">-</button>
+							<input class="counter" id="quantity{{item.Product.id}}" type="text" name="quantity" value="{{item.Cart.count}}">
+							<button id="plus{{item.Product.id}}" class="plus">+</button>
+							<script type="text/javascript">
+								$(document).ready(function(){
+									$('#minus{{item.Product.id}}').click(function(){
+										$.post('{{url_for("subItemCart")}}', {'product_id': {{item.Product.id}}})
+										$('#quantity{{item.Product.id}}').val(Number($('#quantity{{item.Product.id}}').val())-1);
+										if (Number($('#quantity{{item.Product.id}}').val()) === 0){
+											$.post('{{ url_for("deleteItemCart") }}', {'product_id': {{item.Product.id}}})
+											$("#td{{item.Product.id}}").remove();
+										}
+									})
+
+									$('#plus{{item.Product.id}}').click(function(){
+										$.post('{{url_for("addItemCart")}}', {'product_id': {{item.Product.id}}})
+										$('#quantity{{item.Product.id}}').val(Number($('#quantity{{item.Product.id}}').val())+1);
+									})
+
+								});
+							</script>
+						</div>
+					</div>
+					
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+
+
+	<footer>
+	  <div class="container contacts">
+	    <ul class="contact">
+	      <li class="mail"><span>E-mail@gmail.com</span></li>
+	      <li class="number"><span>8-800-666-35-35</span></li>
+	    </ul>
+	  </div>
+	</footer>
+
+
+	<script src="{{ url_for('static', filename='js/jquery.modal.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/cart.js') }}"></script> 
+	<script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
+</body> 
+</html>

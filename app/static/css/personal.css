@@ -1,3 +1,14 @@
+.personal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.personal__logout{
+  width: 50%;
+  margin-bottom: 50px;
+}
+
 .personal__wrapper{
   display: flex;
   align-items: flex-start;

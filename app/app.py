@@ -111,6 +111,40 @@ def product(product):
 	return render_template('product.html', Category=Category, product=product)
 
 
+@app.route('/cart/')
+def cart():
+	Category = getCategory()
+	cart = getCartItem(session['id'])
+	return render_template('cart.html', Category=Category, cart=cart)
+
+
+@app.route('/addCart/', methods=['POST'])
+def addCart():
+	product_id = request.form.get('product_id')
+	try:
+		addCountCartItem(session['id'], product_id)
+		return "+1"
+	except Exception as e:
+		addCartItem(session['id'], product_id)
+		return "Товар добавлен в корзину"
+
+
+@app.route('/addItemCart/', methods=['POST'])
+def addItemCart():
+	product_id = request.form.get('product_id')
+	return f"{addCountCartItem(session['id'], product_id)}"
+
+@app.route('/subItemCart/', methods=['POST'])
+def subItemCart():
+	product_id = request.form.get('product_id')
+	return f"{subCountCartItem(session['id'], product_id)}"
+
+
+@app.route('/deleteItemCart', methods=['POST'])
+def deleteItemCart():
+	product_id = request.form.get('product_id')
+	return deleteItemCart_byId(session['id'], product_id)
+
 @app.route('/logout/')
 def logout():
 	session['isAuth'] = False
@@ -118,3 +152,27 @@ def logout():
 	session['id'] = ''
 	session['email'] = ''
 	return redirect(session['side'])
+
+
+
+@app.route('/personal/update/avatar', methods=['POST'])
+def personalUpdateAvatar():
+	photo = request.files['avatar']
+	updateUserAvatar(session['id'], photo)
+	return redirect(url_for('personal'))
+
+
+@app.route('/personal/update/data', methods=['POST'])
+def personalUpdateData():
+	login = request.form.get('login')
+	email = request.form.get('email')
+	phone = request.form.get('phone')
+	updateUserData(session['id'], login, email, phone)
+	return redirect(url_for('personal'))
+
+
+@app.route('/personal/update/password', methods=['POST'])
+def personalUpdatePassword():
+	password = request.form.get('password')
+	updateUserPassword(session['id'], password)
+	return redirect(url_for('personal'))

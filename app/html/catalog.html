@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.modal.min.css') }}" />
 </head>
 <body>
+  <script src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
 	<header>
     <div class="logo__wrapper">
       <a href="{{url_for('index')}}"><img src="{{ url_for('static', filename='img/lenin.png') }}"></a>
@@ -52,10 +53,10 @@
             <li class="fourth-card">
               <a href="{{url_for('personal')}}" class="nav-button">Личный кабинет</a>
             </li>
-            <li class="fifth-card">
-              <a href="{{url_for('logout')}}" class="nav-button">Выйти</a>
-            </li>
             {% endif %}
+            <li>
+              <a href="{{url_for('cart')}}" class="nav-button">Корзина</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -77,6 +78,7 @@
           </a>
         </div>
       </div>
+
       {%endfor%}
     </div>
 
@@ -91,13 +93,28 @@
     <section class="products">
     	<div class="products-cards-wrapper" id="products">
            {% for item in product %}
-           <div class="product-card">
-            <img class="products-img" src="data:jpeg;base64,{{ item }}">
-            <a class="product__title" href="{{url_for('product', product=item.name)}}">{{ item.name }}<br>{{item.price}}</a>
-            <div class="products__cart__wrapper">
-              <button>В корзину</button>
+           <form id="{{item.id}}" class="form__product__card" action="{{url_for('addCart')}}" method='POST' >
+            <input type="text" name="product_id" value="{{item.id}}" style="opacity: 0;">
+             <div class="product-card">
+              <img class="products-img" src="data:jpeg;base64,{{ item }}">
+              <a class="product__title" href="{{url_for('product', product=item.name)}}">{{ item.name }}<br>{{item.price}}</a>
+              <div class="products__cart__wrapper">
+                <button form="{{item.id}}">В корзину</button>
+                <span id="span{{item.id}}"></span>
+              </div>
             </div>
-          </div>
+           </form>
+           <script type="text/javascript">
+             $(document).ready(function(){
+               $('#{{item.id}}').submit(function(e){
+                 e.preventDefault();
+                 sendData = $('#{{item.id}}').serialize();
+                 $.post('{{url_for("addCart")}}', sendData, function(data){
+                    $("#span{{item.id}}").html(data); 
+                 });
+               });
+             });
+           </script>
           {% endfor %}
       </div>
 
@@ -120,8 +137,9 @@
     </footer>
 
 
-    <script src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
+   
     <script src="{{ url_for('static', filename='js/jquery.modal.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/catalog.js') }}"></script>
 </body>
 </html>
