@@ -24,19 +24,22 @@ def admin_category():
 
 @app.route('/admin/product/', methods=['GET', 'POST'])
 def admin_product():
-	if getAdmin(session['id']):
-		Category = getCategory()
-		if request.method == 'POST':
-			name = request.form.get('name')
-			price = request.form.get('price')
-			description = request.form.get('description')
-			photo = request.files['photo']
-			category_id = request.form.get('category_id')
-			addProduct(name, price, description, photo, category_id)
-		return render_template('admin_product.html', Category=Category) 
+	
+	Category = getCategory()
+	if request.method != 'POST':
+		if not getAdmin(session['id']):
+			return redirect(url_for('index'))
+		return render_template('admin_product.html', Category=Category)
+
+	name = request.form.get('name')
+	price = request.form.get('price')
+	description = request.form.get('description')
+	photo = request.files['photo']
+	category_id = request.form.get('category_id')
+	addProduct(name, price, description, photo, category_id)
+	return 200
 
 
-	return redirect(url_for('index'))
 
 
 @app.route('/login/', methods=['POST', 'GET'])
