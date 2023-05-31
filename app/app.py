@@ -13,22 +13,23 @@ def index():
 
 @app.route('/admin/category/', methods=['GET', 'POST'])
 def admin_category():
-	if getAdmin(session['id']):
-		if request.method == 'POST':
-			name = request.form.get('name')
-			photo = request.files['photo']
-			addCategory(name, photo)
+	if not getAdmin(session['id']):
+		return redirect(url_for('index'))
+	if request.method != 'POST':
 		return render_template('admin_category.html')
+	name = request.form.get('name')
+	photo = request.files['photo']
+	addCategory(name, photo)
+	return
 
-	return redirect(url_for('index'))
 
 @app.route('/admin/product/', methods=['GET', 'POST'])
 def admin_product():
 	
 	Category = getCategory()
+	if not getAdmin(session['id']):
+		return redirect(url_for('index'))
 	if request.method != 'POST':
-		if not getAdmin(session['id']):
-			return redirect(url_for('index'))
 		return render_template('admin_product.html', Category=Category)
 
 	name = request.form.get('name')
@@ -37,66 +38,68 @@ def admin_product():
 	photo = request.files['photo']
 	category_id = request.form.get('category_id')
 	addProduct(name, price, description, photo, category_id)
-	return 200
+	return 
 
 
 
 
 @app.route('/login/', methods=['POST', 'GET'])
 def login():
-	if request.method == 'POST':
-		login = request.form.get('login')
-		password = request.form.get('password')
-		if user := getUser_byPassword(login, password):
-			session['isAuth'] = True
-			session['login'] = login
-			session['id'] = user.id
-			session['email'] = user.email
+	if request.method != 'POST':
+		return render_template('login.html')
+	login = request.form.get('login')
+	password = request.form.get('password')
+	if user := getUser_byPassword(login, password):
+		session['isAuth'] = True
+		session['login'] = login
+		session['id'] = user.id
+		session['email'] = user.email
 
 
-			return redirect(session['side'])
+		return redirect(session['side'])
 
-		return render_template('login.html', message='Не верный логин или пароль')	
+	return render_template('login.html', message='Не верный логин или пароль')	
 				
 
-	return render_template('login.html')
 
 
 @app.route('/registry/', methods=['POST', 'GET'])
 def registry():
-	if request.method == 'POST':
-		login = request.form.get('login')
-		password = request.form.get('password')
-		email = request.form.get('email')
-		phone = request.form.get('phone')
-		photo = request.files['avatar']
-		try:
-			error = ''
-			user = registryUser(login, password, email, phone, photo)
-			session['isAuth'] = True
-			session['login'] = login
-			session['id'] = user.id
-			session['email'] = user.email
-			return redirect(url_for('index'))
-			print('pass')
-		except Exception as e:
-			print(e)
-			error = 'Вы используете уже существующие данные'
-			return render_template('registry.html', error=error)
+	if request.method != 'POST':
+		return render_template('registry.html')
+
+	login = request.form.get('login')
+	password = request.form.get('password')
+	email = request.form.get('email')
+	phone = request.form.get('phone')
+	photo = request.files['avatar']
+	try:
+		error = ''
+		user = registryUser(login, password, email, phone, photo)
+		session['isAuth'] = True
+		session['login'] = login
+		session['id'] = user.id
+		session['email'] = user.email
+		return redirect(url_for('index'))
+		print('pass')
+	except Exception as e:
+		print(e)
+		error = 'Вы используете уже существующие данные'
+		return render_template('registry.html', error=error)
 			
 
-	return render_template('registry.html')
 
 
 @app.route('/personal/')
 def personal():
 	session['side'] = '/personal/'
-	if session['isAuth']:
-		user = getUser_byId(session['id'])
-		Category = getCategory()
-		return render_template('personal.html', Category=Category, user=user)
+	if not session['isAuth']:
+		return redirect(url_for('index'))
 
-	return redirect(url_for('index'))
+	user = getUser_byId(session['id'])
+	Category = getCategory()
+	return render_template('personal.html', Category=Category, user=user)
+
 
 
 @app.route('/catalog/<category>/', methods=['GET'])
