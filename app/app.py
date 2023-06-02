@@ -190,5 +190,4 @@ def personalUpdatePassword():
 
 @app.route('/cart/getTotalPrice/', methods=['POST'])
 def getTotalPrice():
-	print(f"{getSumCart(session['id']).sum_cart}")
 	return f"{getSumCart(session['id']).sum_cart}"
