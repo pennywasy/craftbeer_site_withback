@@ -5,6 +5,7 @@ from app.Models.User import User
 from app.Models.Product import Product
 from app.Models.Admin import Admin
 from app.Models.Cart import Cart
+from sqlalchemy import func
 import base64
 
 def addCategory(name, photo):
@@ -100,3 +101,10 @@ def getCartItem(user_id):
 	# cartItem = Product.query.join(Cart, Cart.product_id == Product.id).join(User, User.id == Cart.user_id)
 	cartItem = cartItem.filter(User.id == user_id)
 	return cartItem
+
+
+def getSumCart(user_id):
+	SumCart = db.session.query(func.sum(Product.price * Cart.count).label('sum_cart')).join(Cart, Cart.product_id == Product.id).join(User, User.id == Cart.user_id)
+	SumCart = SumCart.filter(User.id == user_id).first()
+
+	return SumCart

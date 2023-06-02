@@ -7,6 +7,9 @@ $(document).ready(function(){
 			data: new FormData($("#form__admin")[0]),
 			processData: false,
 			contentType: false,
+            success: function(data){
+                $("#result").html(`<span>${data}</span>`);
+            }
 		});
 	});
 });

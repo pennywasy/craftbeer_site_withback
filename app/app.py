@@ -37,8 +37,11 @@ def admin_product():
 	description = request.form.get('description')
 	photo = request.files['photo']
 	category_id = request.form.get('category_id')
-	addProduct(name, price, description, photo, category_id)
-	return 
+	try:
+		addProduct(name, price, description, photo, category_id)
+		return "Карточка товара успешно загружена"
+	except:
+		return "Произошла ошибка"
 
 
 
@@ -121,7 +124,8 @@ def product(product):
 def cart():
 	Category = getCategory()
 	cart = getCartItem(session['id'])
-	return render_template('cart.html', Category=Category, cart=cart)
+	SumCart = getSumCart(session['id'])
+	return render_template('cart.html', Category=Category, cart=cart, SumCart=SumCart)
 
 
 @app.route('/addCart/', methods=['POST'])
@@ -182,3 +186,9 @@ def personalUpdatePassword():
 	password = request.form.get('password')
 	updateUserPassword(session['id'], password)
 	return redirect(url_for('personal'))
+
+
+@app.route('/cart/getTotalPrice/', methods=['POST'])
+def getTotalPrice():
+	print(f"{getSumCart(session['id']).sum_cart}")
+	return f"{getSumCart(session['id']).sum_cart}"

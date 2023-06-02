@@ -102,7 +102,7 @@
 					<div class="cart__name__wrapper">
 						<a href="">{{ item.Product.name }}</a>
 						<div class="cart__price__wrapper">
-							<span>{{ item.Product.price }}₽</span>
+							<span id="price{{item.Product.id}}">{{ item.Product.price * item.Cart.count }}₽</span>
 						</div>
 						<div class="cart__counter">
 							<button id="minus{{item.Product.id}}" class="minus">-</button>
@@ -111,19 +111,32 @@
 							<script type="text/javascript">
 								$(document).ready(function(){
 									$('#minus{{item.Product.id}}').click(function(){
-										$.post('{{url_for("subItemCart")}}', {'product_id': {{item.Product.id}}})
+										$.post('{{url_for("subItemCart")}}', {'product_id': {{item.Product.id}}}, function(){
+												$.post('{{url_for("getTotalPrice")}}', {}, function(data){
+													$('#totalPrice').html(`${data}₽`)
+												})
+										})
+
 										$('#quantity{{item.Product.id}}').val(Number($('#quantity{{item.Product.id}}').val())-1);
+										$("#price{{item.Product.id}}").html(`${Number({{item.Product.price}}) * Number($("#quantity{{item.Product.id}}").val())}.00₽`)
 										if (Number($('#quantity{{item.Product.id}}').val()) === 0){
 											$.post('{{ url_for("deleteItemCart") }}', {'product_id': {{item.Product.id}}})
 											$("#td{{item.Product.id}}").remove();
 										}
+
 									})
 
 									$('#plus{{item.Product.id}}').click(function(){
-										$.post('{{url_for("addItemCart")}}', {'product_id': {{item.Product.id}}})
+										$.post('{{url_for("addItemCart")}}', {'product_id': {{item.Product.id}}}, function(){
+												$.post('{{url_for("getTotalPrice")}}', {}, function(data){
+													$('#totalPrice').html(`${data}₽`)
+												})
+										})
 										$('#quantity{{item.Product.id}}').val(Number($('#quantity{{item.Product.id}}').val())+1);
+										$("#price{{item.Product.id}}").html(`${Number({{item.Product.price}}) * Number($("#quantity{{item.Product.id}}").val())}.00₽`)
+										
 									})
-
+										
 								});
 							</script>
 						</div>
@@ -131,6 +144,16 @@
 					
 				</div>
 				{% endfor %}
+			</div>
+
+			<div class="result__wrapper">
+				<span class="price" id='totalPrice'>
+					{{SumCart.sum_cart}}₽
+				</span>
+				<form class="make__order">
+
+					<button class="order__button">Оплатить</button>
+				</form>
 			</div>
 		</div>
 	</section>
