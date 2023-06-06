@@ -59,8 +59,10 @@ def addProduct(name, price, description, photo, category_id):
 	return db.session.commit()
 
 
-def getProducts_byCategory(category):
-	return Product.query.filter_by(category_id=category).all() 
+def getProducts_byCategory(category, page):
+	page = int(page)
+	query = Product.query.filter_by(category_id=category)
+	return (len(query.all()), query.slice(20*(page-1), 20*page).all())
 
 def getProducts_byName(name):
 	return Product.query.filter_by(name=name).first() 

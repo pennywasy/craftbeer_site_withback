@@ -105,12 +105,13 @@ def personal():
 
 
 
-@app.route('/catalog/<category>/', methods=['GET'])
-def catalog(category):
+@app.route('/catalog/<category>/<page>', methods=['GET'])
+def catalog(category, page):
 	session['side'] = f'/catalog/{category}/'
 	Category = getCategory()
-	product = getProducts_byCategory(category)	
-	return render_template('catalog.html', Category=Category, product=product)
+	product = getProducts_byCategory(category, page)	
+	countPages = product[0] // 20 + 1
+	return render_template('catalog.html', Category=Category, product=product[1], countPages=countPages)
 
 
 @app.route('/catalog/product/<product>', methods=['GET'])

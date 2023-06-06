@@ -73,7 +73,7 @@
           <img src="data:jpeg;base64,{{ item }}" alt="" />
         </div>
         <div class="text-wrapper">
-          <a href="/catalog/{{ item.id }}" class="catalog-title">
+          <a href="/catalog/{{ item.id }}/1" class="catalog-title">
               {{ item.name }}
           </a>
         </div>
@@ -120,9 +120,11 @@
 
       <div class="products-nav-ul">
         <ul class="products-nav">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
+          {% if countPages > 1%}
+          {% for i in range(1, countPages+1) %}
+          <li><a href="{{i}}">{{i}}</a></li>
+          {% endfor %}
+          {% endif %}
         </ul>
       </div>
     </section>

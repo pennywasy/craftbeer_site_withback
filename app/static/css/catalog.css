@@ -38,7 +38,8 @@
 }
 
 .products {
-  height: 1800px;
+  max-height: 1800px;
+  min-height: 800px;
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -49,7 +50,7 @@
 .products-cards-wrapper {
   margin: 20px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
   max-width: 1400px;
