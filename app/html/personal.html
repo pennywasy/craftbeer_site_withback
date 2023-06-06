@@ -64,26 +64,28 @@
 	      </div>
 	    </div>
 
-	<div class="catalog" id="catalog" style="display: none">
-    
-    <div class="catalog-title-wrapper">
-      <h1 class="catalog-title">Каталог</h1>
-    </div>
-    <div class="modal-wrapper" id="catalog-wrapper">
-      {% for item in Category%}
-      <div class="catalog-card">
-        <div class="image-wrapper">
-          <img src="data:jpeg;base64,{{ item }}" alt="" />
-        </div>
-        <div class="text-wrapper">
-          <a href="/catalog/{{ item.id }}/1" class="catalog-title">
-              {{ item.name }}
-          </a>
-        </div>
-      </div>
 
-      {%endfor%}
-    </div>
+	    <div class="catalog" id="catalog" style="display: none">
+	      
+	      <div class="catalog-title-wrapper">
+	        <h1 class="catalog-title">Каталог</h1>
+	      </div>
+	      <div class="modal-wrapper" id="catalog-wrapper">
+	        {% for item in Category%}
+	        <div class="catalog-card">
+	          <div class="image-wrapper">
+	            <img src="data:jpeg;base64,{{ item }}" alt="" />
+	          </div>
+	          <div class="text-wrapper">
+	            <a href="/catalog/{{ item.id }}/1" class="catalog-title">
+	                {{ item.name }}
+	            </a>
+	          </div>
+	        </div>
+
+	        {%endfor%}
+	      </div>
+	    </div>
 
 
 	<seciton class="personal">
@@ -119,6 +121,7 @@
 				<button>Выйти</button>
 			</form>
 	</seciton>
+
 	<footer>
 	  <div class="container contacts">
 	    <ul class="contact">
