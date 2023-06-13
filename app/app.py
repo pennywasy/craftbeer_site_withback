@@ -107,7 +107,7 @@ def personal():
 
 @app.route('/catalog/<category>/<page>', methods=['GET'])
 def catalog(category, page):
-	session['side'] = f'/catalog/{category}/'
+	session['side'] = f'/catalog/{category}/{page}'
 	Category = getCategory()
 	product = getProducts_byCategory(category, page)	
 	countPages = product[0] // 20 + 1

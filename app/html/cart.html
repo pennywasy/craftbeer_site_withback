@@ -101,7 +101,7 @@
 						<img src="data:jpeg;base64,{{ item.Product }}">
 					</div>
 					<div class="cart__name__wrapper">
-						<a href="">{{ item.Product.name }}</a>
+						<a href="/catalog/product/{{item.Product.name}}">{{ item.Product.name }}</a>
 						<div class="cart__price__wrapper">
 							<span id="price{{item.Product.id}}">{{ item.Product.price * item.Cart.count }}₽</span>
 						</div>

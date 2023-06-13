@@ -107,3 +107,18 @@
   background-color: #1c1c1c;
   color: white;
 }
+
+.remove__all_from__cart{
+	transition: 0.5s;
+	text-decoration: none;
+	color: black;
+}
+
+.remove__all_from__cart:hover{
+	text-shadow: #fc0 1px 0 10px;
+}
+
+
+.cart{
+	min-height: 600px;
+}
