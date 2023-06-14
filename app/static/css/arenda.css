@@ -1,0 +1,18 @@
+.arenda{
+	padding: 100px 150px 100px 300px;
+	display: flex;
+}
+
+
+.arenda__paragraph{
+	font-size: x-large;
+}
+
+.img__wrapper{
+	width: 400px;
+	height: 500px;
+}
+
+.img__wrapper img {
+	width: 100%;
+}

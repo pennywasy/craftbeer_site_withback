@@ -36,7 +36,7 @@
               <a href="#" class="nav-button" id="button1">каталог</a>
             </li>
 	          <li class="second-card">
-	            <a href="#" class="nav-button">Аренда бара</a>
+	            <a href="/arenda/" class="nav-button">Аренда бара</a>
 	          </li>
 	          <li class="third-card">
 	            <a href="#" class="nav-button">Выездные дегустации</a>
@@ -83,16 +83,11 @@
 
       {%endfor%}
     </div>
-
-	  
-
-	  
-
-	  
 	</div>
 
 
-	<section class="cart">
+	<section id="cart" class="cart">
+		{% if SumCart.sum_cart != None %}
 		<div class="cart__wrapper">
 			<div class="cart__table__wrapper">
 				{% for item in cart %}
@@ -122,7 +117,9 @@
 										$("#price{{item.Product.id}}").html(`${Number({{item.Product.price}}) * Number($("#quantity{{item.Product.id}}").val())}.00₽`)
 										if (Number($('#quantity{{item.Product.id}}').val()) === 0){
 											$.post('{{ url_for("deleteItemCart") }}', {'product_id': {{item.Product.id}}})
-											$("#td{{item.Product.id}}").remove();
+											
+											$('#td{{item.Product.id}}').fadeOut(800, function(){ $(this).remove();});
+											// $("#td{{item.Product.id}}").remove();
 										}
 
 									})
@@ -148,6 +145,7 @@
 			</div>
 
 			<div class="result__wrapper">
+				<a id="remove__all_from__cart" class="remove__all_from__cart" href="">Удалить все</a>
 				<span class="price" id='totalPrice'>
 					{{SumCart.sum_cart}}₽
 				</span>
@@ -157,6 +155,14 @@
 				</form>
 			</div>
 		</div>
+
+
+
+		{% else %}
+		<div class="empty__cart__wrapper">
+			<h2 class="empty__cart">Ваша корзина пуста</h2>
+		</div>
+		{% endif %}
 	</section>
 
 

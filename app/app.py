@@ -192,3 +192,15 @@ def personalUpdatePassword():
 @app.route('/cart/getTotalPrice/', methods=['POST'])
 def getTotalPrice():
 	return f"{getSumCart(session['id']).sum_cart}"
+
+@app.route('/cart/deleteAllFromCart/', methods=['POST'])
+def deleteAllFromCart():
+	deleteCart(session['id'])
+	return '<div class="empty__cart__wrapper"><h2 class="empty__cart">Ваша корзина пуста</h2></div>'
+
+
+@app.route('/arenda/', methods=['GET'])
+def arenda():
+	Category = getCategory()
+	Information = getInfromation()
+	return render_template('arenda.html', Category=Category, Information=Information)

@@ -110,3 +110,9 @@ def getSumCart(user_id):
 	SumCart = SumCart.filter(User.id == user_id).first()
 
 	return SumCart
+
+
+def deleteCart(user_id):
+	Cart.query.filter_by(user_id=user_id).delete()
+	db.session.commit()
+	return

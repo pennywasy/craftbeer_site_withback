@@ -1,5 +1,6 @@
 .cart{
-	padding: 100px 150px 100px 300px;}
+	padding: 100px 150px 100px 300px;
+}
 
 .cart__wrapper{
 	display: flex;
@@ -90,7 +91,7 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	gap: 100px;
+	gap: 80px;
 }
 
 .make__order{
@@ -121,4 +122,9 @@
 
 .cart{
 	min-height: 600px;
+}
+
+
+.empty__cart__wrapper{
+	text-align: center;
 }
