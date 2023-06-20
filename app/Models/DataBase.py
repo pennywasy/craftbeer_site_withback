@@ -35,8 +35,8 @@ def updateUserPassword(id, password):
 	db.session.commit()
 	return
 
-def updateUserData(id, login, email, phone):
-	User.query.filter_by(id=id).update(dict(login=login, email=email, phone=phone))
+def updateUserData(id, login, email, phone, birthday):
+	User.query.filter_by(id=id).update(dict(login=login, email=email, phone=phone, birthday=birthday))
 	db.session.commit()
 	return
 
@@ -46,9 +46,9 @@ def updateUserAvatar(id, photo):
 	db.session.commit()
 	return
 
-def registryUser(login, password, email, phone, photo):
+def registryUser(login, password, email, phone, birthday, photo):
 	photo = base64.b64encode(photo.read())
-	user = User(login, password, email, phone, photo)
+	user = User(login, password, email, phone, birthday, photo)
 	db.session.add(user)
 	db.session.commit()
 	return user

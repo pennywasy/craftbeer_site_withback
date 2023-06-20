@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from app.config import app
 from app.Models.DataBase import *
+import datetime
 
 
 @app.route('/')
@@ -75,10 +76,11 @@ def registry():
 	password = request.form.get('password')
 	email = request.form.get('email')
 	phone = request.form.get('phone')
+	birthday = datetime.datetime.strptime(request.form.get('birthday'), "%Y-%m-%d")
 	photo = request.files['avatar']
 	try:
 		error = ''
-		user = registryUser(login, password, email, phone, photo)
+		user = registryUser(login, password, email, phone, birthday, photo)
 		session['isAuth'] = True
 		session['login'] = login
 		session['id'] = user.id
@@ -178,7 +180,8 @@ def personalUpdateData():
 	login = request.form.get('login')
 	email = request.form.get('email')
 	phone = request.form.get('phone')
-	updateUserData(session['id'], login, email, phone)
+	birthday = datetime.datetime.strptime(request.form.get('birthday'), "%Y-%m-%d")
+	updateUserData(session['id'], login, email, phone, birthday)
 	return redirect(url_for('personal'))
 
 
