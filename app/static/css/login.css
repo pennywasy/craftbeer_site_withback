@@ -218,3 +218,9 @@ body{
 .input__file__button:active{
   background-color: black;
 }
+
+
+.error{
+  transition: all 0.8s;
+  background-color: #ffa9a9 !important ;
+}

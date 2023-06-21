@@ -5,7 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Бар крафтового пива</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
 	<div class="registry__wrapper" id="registry__wrapper">
@@ -35,7 +34,7 @@
 	      <input id="re-password" type="password" name="re-password" placeholder="Повторите пароль" required>
 	      <input type="email" name="email" placeholder="E-mail" required>
 	      <input type="tel" name="phone" placeholder="Телефон" required>
-	      <input type="date" name="birthday">
+	      <input id="birthday" type="date" name="birthday">
 	      <label class="input__file">
 	      	<span class="input__file__text" type='text'></span>
 	      	<input type="file" name="avatar">
@@ -46,6 +45,6 @@
 	  </div>
 	</div>
 	<script src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 </html>
