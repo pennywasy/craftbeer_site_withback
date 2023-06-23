@@ -38,9 +38,6 @@
 	            <li class="second-card">
 	                <a href="/arenda/" class="nav-button">Аренда бара</a>
 	              </li>
-	              <li class="third-card">
-	                <a href="#" class="nav-button">Выездные дегустации</a>
-	              </li>
 
 	            {% if not session['isAuth'] %}
 	            <li class="fourth-card">
@@ -99,9 +96,12 @@
 	  				</h2>
 	  			</div>
 	  			<div class="product__cart__wrapper">
-	  				<form class="cart" action="#">
+	  				<form id="cart" class="cart" action="" method="POST">
+	  					<input type="text" name="product_id" value="{{product.id}}" style="opacity: 0;">
 	  					<button>В корзину</button>
+	  					<span id="result"></span>
 	  				</form>
+	  				
 	  			</div>
 	  			<div class="product__article__wrapper">
 	  				<p class="product__article">
@@ -126,5 +126,6 @@
 	  <script src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
 	  <script src="{{ url_for('static', filename='js/jquery.modal.min.js') }}"></script>
 	  <script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
+	  <script type="text/javascript" src="{{ url_for('static', filename='js/product.js') }}"></script>
 </body>
 </html>

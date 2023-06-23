@@ -64,8 +64,8 @@ def getProducts_byCategory(category, page):
 	query = Product.query.filter_by(category_id=category)
 	return (len(query.all()), query.slice(20*(page-1), 20*page).all())
 
-def getProducts_byName(name):
-	return Product.query.filter_by(name=name).first() 
+def getProducts_byId(id):
+	return Product.query.filter_by(id=id).first() 
 
 
 def getAdmin(user_id):

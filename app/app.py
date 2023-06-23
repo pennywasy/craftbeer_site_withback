@@ -116,10 +116,10 @@ def catalog(category, page):
 	return render_template('catalog.html', Category=Category, product=product[1], countPages=countPages)
 
 
-@app.route('/catalog/product/<product>', methods=['GET'])
+@app.route('/catalog/product/<product>/', methods=['GET'])
 def product(product):
 	Category = getCategory()
-	product = getProducts_byName(product)
+	product = getProducts_byId(product)
 	return render_template('product.html', Category=Category, product=product)
 
 
